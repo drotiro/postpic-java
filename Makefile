@@ -1,35 +1,24 @@
 # Variables
-SUBDIRS = server utils
+ANT ?= ant
+JDBC = jdbc
+SAMPLE = samples/PostPicSQL
 
 # Targets
-postpic: check
-	@$(foreach i,$(SUBDIRS), make -C $i || exit 1; )
+jdbc: check
+	@${ANT} -f ${JDBC}/build.xml
 
-jdbc: jcheck
-	@ant -f jdbc/build.xml
-
-examples: jdbc
-	@ant -f examples/PostPicSQL/build.xml
+samples: jdbc
+	@${ANT} -f ${SAMPLE}/build.xml
 
 clean:
-	@$(foreach i,$(SUBDIRS), make -C $i clean ;)
+	@${ANT} -f ${JDBC}/build.xml clean
+	@${ANT} -f ${SAMPLE}/build.xml clean
 
-jdbc-clean:
-	@ant -f jdbc/build.xml clean
-
-install: postpic
-	@$(foreach i,$(SUBDIRS), make -C $i install; )
-
-all: postpic jdbc
-clean-all: clean jdbc-clean
-
-jcheck:
-	@echo " *** Checking for required programs"
-	@(echo -n " ant                  :" && which ant) || (echo " missing!"  && exit 1)
+all: jdbc samples
 
 check:
 	@echo " *** Checking for required programs"
-	@(echo -n " GraphicsMagick-config: " && which GraphicsMagick-config) || (echo " missing!"  && exit 1)
-	@(echo -n " pg_config            : " && which pg_config) || (echo " missing!"  && exit 1)
+	@(echo -n " ant                  :" && which ant) || (echo " missing!"  && exit 1)
 
-.PHONY:	jdbc jdbc-clean check
+.PHONY:	jdbc clean check
+

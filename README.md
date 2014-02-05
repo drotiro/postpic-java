@@ -1,28 +1,12 @@
-PostPic: A PostgreSQL extension for image-processing
-====================================================
+Java interface for PostPic
+==========================
 
-PostPic is an extension for the open source PostgreSQL dbms that enables
-image processing inside the database, like PostGIS does for spatial data.
-It adds the new 'image' type to the SQL, and several functions to process
-images and to extract their attributes.
+An extension to the PostgreSQL jdbc driver to deal with `image` data in Java.
 
-Eg.
+To test and use this code you need a database with the [PostPic](http://github.com/drotiro/postpic)
+extension and some image loaded in.
 
-      select * from images 
-               where date(the_img) > '2009-01-01'::date
-               and size(the_img) > 1600;
-
-Traditional relational clauses can be combined in queries with image-related
-ones, and basic image processing can be performed in SQL.
-
-
-Resources
----------
-
-PostPic is hosted at [GitHub](http://github.com/drotiro/postpic), 
-there you can find all the code releases and the project 
-[Wiki](http://wiki.github.com/drotiro/postpic/>) 
-with detailed documentation about the project.
+See the PostPic [Wiki](http://wiki.github.com/drotiro/postpic/>) for more informations.
 
 
 Contents of this package
@@ -30,10 +14,9 @@ Contents of this package
 
 This package contains the following:
 
- * __server__: sources for the server extension
- * __utils__: utilities for client-side loading of images, etc.
- * __jdbc__: mapping for the new type, enhances the postgresql jdbc driver
- * __examples__: example programs and sql scripts
+ * __jdbc__: java mapping for the image type, enhances the postgresql jdbc driver
+ * __samples__: an example Java program using the jdbc driver extension to
+ query and display images
 
 
 Copyright and license
